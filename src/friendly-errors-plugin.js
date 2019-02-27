@@ -33,6 +33,11 @@ class FriendlyErrorsWebpackPlugin {
     this.formatters = concat(defaultFormatters, options.additionalFormatters);
     this.transformers = concat(defaultTransformers, options.additionalTransformers);
     this.previousEndTimes = {};
+
+    // fix https://github.com/chalk/chalk/issues/234
+    if (options.forceFormatting) {
+      chalk.enabled = true;
+    }
   }
 
   apply(compiler) {
